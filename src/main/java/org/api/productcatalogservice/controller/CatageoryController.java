@@ -1,7 +1,7 @@
-package org.api.productcatalogservice.demo.controller;
+package org.api.productcatalogservice.controller;
 
-import org.api.productcatalogservice.demo.model.Product;
-import org.api.productcatalogservice.demo.repo.ProductRepo;
+import org.api.productcatalogservice.model.Product;
+import org.api.productcatalogservice.repo.ProductRepo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

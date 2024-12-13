@@ -1,9 +1,9 @@
-package org.api.productcatalogservice.demo.model;
+package org.api.productcatalogservice.model;
 
 
 import lombok.Getter;
 import lombok.Setter;
-import org.api.productcatalogservice.demo.util.CatageoryType;
+import org.api.productcatalogservice.util.CatageoryType;
 
 @Setter
 @Getter

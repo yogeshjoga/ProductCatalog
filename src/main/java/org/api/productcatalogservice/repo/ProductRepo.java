@@ -1,8 +1,8 @@
-package org.api.productcatalogservice.demo.repo;
+package org.api.productcatalogservice.repo;
 
-import org.api.productcatalogservice.demo.model.Product;
-import org.api.productcatalogservice.demo.util.CatageoryType;
-import org.api.productcatalogservice.demo.util.State;
+import org.api.productcatalogservice.model.Product;
+import org.api.productcatalogservice.util.CatageoryType;
+import org.api.productcatalogservice.util.State;
 
 import java.util.ArrayList;
 

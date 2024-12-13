@@ -1,8 +1,8 @@
-package org.api.productcatalogservice.demo.model;
+package org.api.productcatalogservice.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.api.productcatalogservice.demo.util.State;
+import org.api.productcatalogservice.util.State;
 
 @Setter
 @Getter

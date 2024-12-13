@@ -1,4 +1,4 @@
-package org.api.productcatalogservice.demo.util;
+package org.api.productcatalogservice.util;
 
 public enum CatageoryType {
     ELECTRONIC,ELECTRONIC_CATALOG,MICROSOFT,MICROSOFT_CATALOG,
