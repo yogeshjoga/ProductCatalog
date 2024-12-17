@@ -1,9 +1,11 @@
 package org.api.productcatalogservice.controller;
 
 
+import org.api.productcatalogservice.exceptions.IdNotFoundException;
 import org.api.productcatalogservice.model.Product;
 import org.api.productcatalogservice.repo.ProductRepo;
 import org.api.productcatalogservice.service.IProductService;
+import org.api.productcatalogservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +21,8 @@ public class ProductController {
 
     ProductRepo repo = new ProductRepo();
     ArrayList<Product> list = repo.add();
-
+    @Autowired
+    private ProductService productService;
 
 
     @GetMapping  ("/log")
@@ -59,15 +62,30 @@ public class ProductController {
     MultiValueMap<String, String> headers = null;
 
     @GetMapping("/product_by_id/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) {
+    public ResponseEntity<Product> getProductById(@PathVariable("id") Long id) throws IdNotFoundException {
         headers = new LinkedMultiValueMap<>();
-        if(id <= 0){
-            headers.add("Its not allowed", "Due to invalid id");
-            return new ResponseEntity<>(null,headers, HttpStatus.NOT_FOUND);
+        try{
+            if(id <= 0){
+                headers.add("Its not allowed", "Due to invalid id");
+                throw new IdNotFoundException("Your Id is invalid or Not_Found");
+              //  return new ResponseEntity<>(null,headers, HttpStatus.NOT_FOUND);
+            }else if(id > 20){
+                headers.add("Its not allowed", "Due to invalid id");
+                throw new IdNotFoundException("Your Product ID is More then our product total list count!");
+            }
+
+            Product  product = productService.getProductById(id);
+
+            if(product == null){
+                headers.add("Its not allowed", "Due to invalid id");
+                throw new IdNotFoundException("OOPS! Product not found");
+            }
+            return new ResponseEntity<>(product, headers, HttpStatus.OK);
+
+        }catch (IdNotFoundException e){
+            throw e;
         }
-        headers.add("Its allowed ", "allowed");
-        headers.add("Its allowed ha ha ", "allowed ha ha");
-        return new ResponseEntity<>(service.getProductById(id), headers, HttpStatus.OK);
+
     }
 
 

@@ -1,7 +1,6 @@
 package org.api.productcatalogservice.service;
 
-
-import org.api.productcatalogservice.dto.ProductResponceDto;
+import org.api.productcatalogservice.client.FakeStoreApi;
 import org.api.productcatalogservice.dto.RequestProductDto;
 import org.api.productcatalogservice.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,10 @@ public class ProductService implements IProductService {
     @Autowired
     RestTemplateBuilder builder;
 
+
+    @Autowired
+    FakeStoreApi api;
+
     /**
      *
      * @param id
@@ -31,11 +34,9 @@ public class ProductService implements IProductService {
 
     @Override
     public Product getProductById(Long id) {
-        RestTemplate restTemplate = builder.build();
-        ResponseEntity<RequestProductDto> dto = restTemplate.getForEntity("https://fakestoreapi.com/products/{id}", RequestProductDto.class,id);
-        return from(dto.getBody());
+       RequestProductDto dto = api.getProductById(id);
+       return from(dto);
     }
-
 
 
 
@@ -80,10 +81,5 @@ public class ProductService implements IProductService {
             return false;
         }
     }
-
-
-
-
-
 
 }
