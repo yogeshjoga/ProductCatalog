@@ -1,4 +1,4 @@
-package org.api.productcatalogservice.controller;
+package org.api.productcatalogservice.controller.apiFakeStore;
 
 
 import org.api.productcatalogservice.exceptions.IdNotFoundException;
