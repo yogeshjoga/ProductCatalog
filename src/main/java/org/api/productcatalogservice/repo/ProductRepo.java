@@ -20,11 +20,11 @@ public class ProductRepo {
             p.setState(State.ACTIVE);
             p.setImageUrl("Proucts imageurl "+i);
             p.setPrice(000000123D + i);
-            if((i&1) == 0){
-                p.setCatageoryType(CatageoryType.BIOMETRIC);
-            }else{
-                p.setCatageoryType(CatageoryType.ELECTRONIC);
-            }
+//            if((i&1) == 0){
+//                p.setCatageoryType(CatageoryType.BIOMETRIC);
+//            }else{
+//                p.setCatageoryType(CatageoryType.ELECTRONIC);
+//            }
             list.add(p);
         }
         return list;

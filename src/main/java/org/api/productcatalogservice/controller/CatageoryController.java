@@ -32,17 +32,17 @@ public class CatageoryController {
     }
 
 
-    @GetMapping("{name}")
-    public List<Product> getCatageoryProductsByCategory(@PathVariable("name") String category) {
-        List<Product> result = new ArrayList<>();
-        List<Product> list = repo.add();
-        for(Product p: list) {
-            if(p.getCatageoryType().toString().equalsIgnoreCase(category)) {
-                result.add(p);
-            }
-        }
-        return result;
-    }
+//    @GetMapping("{name}")
+//    public List<Product> getCatageoryProductsByCategory(@PathVariable("name") String category) {
+//        List<Product> result = new ArrayList<>();
+//        List<Product> list = repo.add();
+//        for(Product p: list) {
+//            if(p.getCatageoryType().toString().equalsIgnoreCase(category)) {
+//                result.add(p);
+//            }
+//        }
+//        return result;
+//    }
 
 
 
