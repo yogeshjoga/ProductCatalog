@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity(name = "AT_Tas")
+@Entity(name = "JN_Tas")
 // Inhertiance based on primary
 @PrimaryKeyJoinColumn(name ="user_id")
 public class Ta extends User {

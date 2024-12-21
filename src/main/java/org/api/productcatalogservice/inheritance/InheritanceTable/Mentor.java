@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity(name = "AT_mentors")
+@Entity(name = "IN_mentors")
 public class Mentor extends User {
     private Boolean  isFullTime;
     private String  prevCompany;

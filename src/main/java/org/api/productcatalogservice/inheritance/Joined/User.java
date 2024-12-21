@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Setter
 @Getter
-@Entity(name ="AT_users")
+@Entity(name ="JN_users")
 // Inheritance
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {

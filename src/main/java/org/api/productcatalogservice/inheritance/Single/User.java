@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Setter
 @Getter
-@Entity(name ="AT_users")
+@Entity(name ="SS_users")
 // Inheritance
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "user_typ", discriminatorType = DiscriminatorType.INTEGER)

@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity(name = "AT_Tas")
+@Entity(name = "IN_Tas")
 public class Ta extends User {
     private Boolean isFullTime;
 }
