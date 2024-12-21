@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity(name = "AT_instructors")
+@Entity(name = "JN_instructors")
 // inhertiance
 @PrimaryKeyJoinColumn(name = "user_id")
 public class Instructor extends User {

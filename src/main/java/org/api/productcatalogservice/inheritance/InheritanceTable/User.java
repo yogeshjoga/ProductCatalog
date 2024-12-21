@@ -8,10 +8,9 @@ import java.util.UUID;
 
 @Setter
 @Getter
-@Entity(name ="AT_users")
 // Inheritance
 @MappedSuperclass
-public class User {
+public abstract class User {
     @Id
     private UUID id;
     private String name;

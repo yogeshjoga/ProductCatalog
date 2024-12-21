@@ -1,4 +1,5 @@
 package org.api.productcatalogservice.models.consts;
 
-public enum TIME {
+public enum WORK_TYPE {
+    FULL_TIME, PARTIAL_TIME;
 }

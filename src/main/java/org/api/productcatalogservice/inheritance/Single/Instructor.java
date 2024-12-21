@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity(name = "AT_instructors")
+@Entity(name = "SS_instructors")
 @DiscriminatorValue("10")
 public class Instructor extends User {
     private Boolean isFullTime;
