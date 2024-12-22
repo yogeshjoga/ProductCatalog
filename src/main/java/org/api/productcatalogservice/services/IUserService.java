@@ -6,6 +6,7 @@ import org.api.productcatalogservice.dtos.ResponseUserDTO;
 import org.api.productcatalogservice.models.User;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface IUserService {
      boolean login(String username, String password);
@@ -14,5 +15,6 @@ public interface IUserService {
      User saveUser(RequestUserDTO user);
      User getUsernameAndPassword(String username, String password);
      ResponseUserDTO updateUser(RequestUserDTO dto);
+     User getUserById(UUID id);
 
 }

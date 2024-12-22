@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService implements IUserService {
@@ -25,11 +26,22 @@ public class UserService implements IUserService {
 
     private static final Logger logger = LogManager.getLogger(UserService.class);
 
+
+
+
+    @Override
+    public User getUserById(UUID id){
+        logger.info("getUserById");
+        return userRepo.findById(id);
+    }
+
+
     @Override
     public boolean login(String username, String password) {
         logger.info("Username : " + username + " Password : " + password);
         return false;
     }
+
 
     @Override
     public boolean register(String username, String password) {
@@ -44,11 +56,13 @@ public class UserService implements IUserService {
         return false;
     }
 
+
     @Override
     public List<User> getAllUsers() {
         logger.info( "Get all Users ", userRepo.findAll() );
         return userRepo.findAll();
     }
+
 
     @Override
     public User saveUser(RequestUserDTO user) {
@@ -60,6 +74,7 @@ public class UserService implements IUserService {
         return userUtils.getUser(user,null);
     }
 
+
     @Override
     public User getUsernameAndPassword(String username, String password) {
         User user = userRepo.findByUsernameAndPassword(username, password);
@@ -68,6 +83,7 @@ public class UserService implements IUserService {
         }
         return null;
     }
+
 
     @Override
     public ResponseUserDTO updateUser(RequestUserDTO dto) {

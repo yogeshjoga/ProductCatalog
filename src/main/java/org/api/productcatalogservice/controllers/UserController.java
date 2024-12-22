@@ -19,6 +19,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/user/api/v1/")
@@ -33,13 +34,14 @@ public class UserController {
 
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> getUser(@PathVariable long id) {
+    public ResponseEntity<User> getUser(@PathVariable UUID id) {
         headers = new LinkedMultiValueMap<>();
         headers.add("Accept", "application/json");
         logger.info("Get user with id " + id);
         headers.add("Responce Testing","true");
      //   return ResponseEntity.status(200).body(null);
-        return new ResponseEntity<>(null, headers, HttpStatus.OK);
+        User user = userService.getUserById(id);
+        return new ResponseEntity<>(user, headers, HttpStatus.OK);
     }
 
     @GetMapping("/users")
