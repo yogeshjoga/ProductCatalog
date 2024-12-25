@@ -1,10 +1,13 @@
+# schema backup this is the First Version of the Schema
+# We can migrate whole data from one to another...
+
 CREATE TABLE at_instructors
 (
     id           BINARY(16)   NOT NULL,
     name         VARCHAR(255) NULL,
     email        VARCHAR(255) NULL,
     phone        VARCHAR(255) NULL,
-    is_full_time BIT(1)       NULL,
+    is_full_time BIT(1) NULL,
     prev_company VARCHAR(255) NULL,
     CONSTRAINT pk_at_instructors PRIMARY KEY (id)
 );
@@ -15,7 +18,7 @@ CREATE TABLE at_mentors
     name         VARCHAR(255) NULL,
     email        VARCHAR(255) NULL,
     phone        VARCHAR(255) NULL,
-    is_full_time BIT(1)       NULL,
+    is_full_time BIT(1) NULL,
     prev_company VARCHAR(255) NULL,
     CONSTRAINT pk_at_mentors PRIMARY KEY (id)
 );
@@ -26,7 +29,7 @@ CREATE TABLE at_tas
     name         VARCHAR(255) NULL,
     email        VARCHAR(255) NULL,
     phone        VARCHAR(255) NULL,
-    is_full_time BIT(1)       NULL,
+    is_full_time BIT(1) NULL,
     CONSTRAINT pk_at_tas PRIMARY KEY (id)
 );
 
@@ -45,7 +48,7 @@ CREATE TABLE in_instructors
     name         VARCHAR(255) NULL,
     email        VARCHAR(255) NULL,
     phone        VARCHAR(255) NULL,
-    is_full_time BIT(1)       NULL,
+    is_full_time BIT(1) NULL,
     prev_company VARCHAR(255) NULL,
     CONSTRAINT pk_in_instructors PRIMARY KEY (id)
 );
@@ -56,7 +59,7 @@ CREATE TABLE in_mentors
     name         VARCHAR(255) NULL,
     email        VARCHAR(255) NULL,
     phone        VARCHAR(255) NULL,
-    is_full_time BIT(1)       NULL,
+    is_full_time BIT(1) NULL,
     prev_company VARCHAR(255) NULL,
     CONSTRAINT pk_in_mentors PRIMARY KEY (id)
 );
@@ -67,14 +70,14 @@ CREATE TABLE in_tas
     name         VARCHAR(255) NULL,
     email        VARCHAR(255) NULL,
     phone        VARCHAR(255) NULL,
-    is_full_time BIT(1)       NULL,
+    is_full_time BIT(1) NULL,
     CONSTRAINT pk_in_tas PRIMARY KEY (id)
 );
 
 CREATE TABLE jn_instructors
 (
     user_id      BINARY(16)   NOT NULL,
-    is_full_time BIT(1)       NULL,
+    is_full_time BIT(1) NULL,
     prev_company VARCHAR(255) NULL,
     CONSTRAINT pk_jn_instructors PRIMARY KEY (user_id)
 );
@@ -82,7 +85,7 @@ CREATE TABLE jn_instructors
 CREATE TABLE jn_mentors
 (
     user_id      BINARY(16)   NOT NULL,
-    is_full_time BIT(1)       NULL,
+    is_full_time BIT(1) NULL,
     prev_company VARCHAR(255) NULL,
     CONSTRAINT pk_jn_mentors PRIMARY KEY (user_id)
 );
@@ -90,7 +93,7 @@ CREATE TABLE jn_mentors
 CREATE TABLE jn_tas
 (
     user_id      BINARY(16) NOT NULL,
-    is_full_time BIT(1)     NULL,
+    is_full_time BIT(1) NULL,
     CONSTRAINT pk_jn_tas PRIMARY KEY (user_id)
 );
 
@@ -109,8 +112,8 @@ CREATE TABLE mentors
     title         VARCHAR(255) NULL,
     `description` VARCHAR(255) NULL,
     image_url     VARCHAR(255) NULL,
-    created_at    datetime     NULL,
-    updated_at    datetime     NULL,
+    created_at    datetime NULL,
+    updated_at    datetime NULL,
     mentor_type   VARCHAR(255) NULL,
     CONSTRAINT pk_mentors PRIMARY KEY (id)
 );
@@ -118,11 +121,11 @@ CREATE TABLE mentors
 CREATE TABLE ss_users
 (
     id           BINARY(16)   NOT NULL,
-    user_typ     INT          NULL,
+    user_typ     INT NULL,
     name         VARCHAR(255) NULL,
     email        VARCHAR(255) NULL,
     phone        VARCHAR(255) NULL,
-    is_full_time BIT(1)       NULL,
+    is_full_time BIT(1) NULL,
     prev_company VARCHAR(255) NULL,
     CONSTRAINT pk_ss_users PRIMARY KEY (id)
 );
@@ -133,8 +136,8 @@ CREATE TABLE teaching_ass
     title         VARCHAR(255) NULL,
     `description` VARCHAR(255) NULL,
     image_url     VARCHAR(255) NULL,
-    created_at    datetime     NULL,
-    updated_at    datetime     NULL,
+    created_at    datetime NULL,
+    updated_at    datetime NULL,
     ta_type       VARCHAR(255) NULL,
     work_type     VARCHAR(255) NULL,
     CONSTRAINT pk_teaching_ass PRIMARY KEY (id)
@@ -146,8 +149,8 @@ CREATE TABLE users
     title         VARCHAR(255) NULL,
     `description` VARCHAR(255) NULL,
     image_url     VARCHAR(255) NULL,
-    created_at    datetime     NULL,
-    updated_at    datetime     NULL,
+    created_at    datetime NULL,
+    updated_at    datetime NULL,
     username      VARCHAR(255) NOT NULL,
     password      VARCHAR(255) NULL,
     CONSTRAINT pk_users PRIMARY KEY (id)
