@@ -2,6 +2,9 @@ package org.api.productcatalogservice.controllers;
 
 
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.api.productcatalogservice.dtos.RequestUserDTO;
 import org.api.productcatalogservice.dtos.ResponseUserDTO;
 import org.api.productcatalogservice.exceptions.PasswordFeildEmpty;
@@ -34,12 +37,22 @@ public class UserController {
 
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> getUser(@PathVariable UUID id) {
+    public ResponseEntity<User> getUser(@PathVariable UUID id, HttpServletResponse response) {
+        // Cookie management
+        Cookie cookie = new Cookie("JSESSIONID", id.toString());
+        cookie.setMaxAge(3600);
+      //  cookie.setHttpOnly(true);
+     //   cookie.setSecure(true);
+        response.addCookie(cookie);
+
+        // header management
         headers = new LinkedMultiValueMap<>();
         headers.add("Accept", "application/json");
-        logger.info("Get user with id " + id);
+        logger.info("------------------------------------------------------------------------------------------------");
+        logger.info("----------------   Get user with id   ----------------------------->  " + id);
+        logger.info("------------------------------------------------------------------------------------------------");
         headers.add("Responce Testing","true");
-     //   return ResponseEntity.status(200).body(null);
+
         User user = userService.getUserById(id);
         return new ResponseEntity<>(user, headers, HttpStatus.OK);
     }
