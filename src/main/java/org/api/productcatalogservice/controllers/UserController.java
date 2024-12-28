@@ -3,7 +3,6 @@ package org.api.productcatalogservice.controllers;
 
 
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.api.productcatalogservice.dtos.RequestUserDTO;
 import org.api.productcatalogservice.dtos.ResponseUserDTO;
@@ -12,6 +11,8 @@ import org.api.productcatalogservice.exceptions.UserNotFoundException;
 import org.api.productcatalogservice.models.User;
 import org.api.productcatalogservice.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
@@ -21,8 +22,11 @@ import org.springframework.web.bind.annotation.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
+
+/**
+ * @author yogeshjoga
+ */
 
 @RestController
 @RequestMapping("/user/api/v1/")
@@ -31,10 +35,21 @@ public class UserController {
     @Autowired
     IUserService userService;
 
+    @Autowired
+    @Qualifier("USE")
+    IUserService userService1;
+
     private static final Logger logger = LogManager.getLogger(UserController.class);
 
     private MultiValueMap<String, String> headers;
 
+
+    /**
+     *
+     * @param id
+     * @param response
+     * @return <b>Returning ResponseEntity UserResponseDto </b>
+     */
 
     @GetMapping("/user/{id}")
     public ResponseEntity<User> getUser(@PathVariable UUID id, HttpServletResponse response) {
@@ -57,6 +72,10 @@ public class UserController {
         return new ResponseEntity<>(user, headers, HttpStatus.OK);
     }
 
+
+    /**
+     * @return <b>ResponseEntity List of UserResponseDto </b>
+     */
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers(){
         headers = new LinkedMultiValueMap<>();
@@ -69,6 +88,11 @@ public class UserController {
     }
 
 
+    /**
+     *
+     * @param dto
+     * @return <b>ResponseEntity UserResponseDto </b>
+     */
     @PostMapping("/new_user")
     public ResponseEntity<User> createUser(@RequestBody RequestUserDTO dto) {
         User user = userService.saveUser(dto);
@@ -82,7 +106,7 @@ public class UserController {
      *
      * @param username
      * @param password
-     * @return
+     * @return <b>ResponseEntity UserResponseDto</b>
      */
     @GetMapping("/user/auth/{user}/{pass}")
     public ResponseEntity<ResponseUserDTO> getUserByUsernameAndPassword(@PathVariable("user") String username, @PathVariable("pass") String password) {
@@ -120,6 +144,11 @@ public class UserController {
     }
 
 
+    /**
+     *
+     * @param dto
+     * @return <b> ResponseEntity UserResponseDto</b>
+     */
     @PatchMapping("/patch")
     public ResponseEntity<ResponseUserDTO> updateUser(@RequestBody RequestUserDTO dto) {
         logger.info("Update user");
@@ -133,10 +162,54 @@ public class UserController {
             throw new PasswordFeildEmpty("Password is null");
         }
       //  User user = userService.getUsernameAndPassword(dto.getUsername(), dto.getPassword());
-        logger.info("update user", "dto");
         headers.add("Responce Testing","true");
         ResponseUserDTO responseUserDTO =  userService.updateUser(dto);
-        headers.add("Responce Testing","true");
         return new ResponseEntity<>(responseUserDTO, headers, HttpStatus.OK);
     }
+
+
+    /**
+     *
+     * @param id
+     * @param response
+     * @return <b>ResponseEntity ResponseUserDTO with Cookies</b>
+     */
+    @DeleteMapping("/delete_user/{id}")
+    public ResponseEntity<ResponseUserDTO> deleteUser(@PathVariable UUID id, HttpServletResponse response) {
+        // Handling Cookies
+        Cookie cookie = new Cookie("JSESSIONID", id.toString());
+        cookie.setMaxAge(3600);
+        response.addCookie(cookie);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        response.addCookie(cookie);
+
+        logger.info("Delete user");
+        // Handling Headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Accept", "application/json");
+        headers.add("Content-Type", "application/json");
+        headers.add("User-Agent", "Mozilla/5.0");
+        logger.info("calling UserRepo deleteUser");
+        ResponseUserDTO dto = userService.deleteUser(id);
+        // use this type of response
+        return ResponseEntity.ok().headers(headers).body(dto);
+    }
+
+    /**
+     * Testing the API, @Qualifier @Primary annotations testing
+     * @return
+     */
+
+    @GetMapping("/yogi")
+    public ResponseEntity<String> deleteUserById() {
+        logger.info("Delete user");
+        userService1.login("admin", "admin");
+        logger.info("Delete user");
+        return ResponseEntity.status(HttpStatus.OK).body("yogesh api get the user ");
+    }
+
+
+
+
 }

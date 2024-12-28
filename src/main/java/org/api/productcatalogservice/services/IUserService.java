@@ -16,5 +16,6 @@ public interface IUserService {
      User getUsernameAndPassword(String username, String password);
      ResponseUserDTO updateUser(RequestUserDTO dto);
      User getUserById(UUID id);
+     ResponseUserDTO deleteUser(UUID id);
 
 }

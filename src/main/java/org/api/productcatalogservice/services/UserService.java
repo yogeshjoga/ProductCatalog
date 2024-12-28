@@ -9,12 +9,14 @@ import org.api.productcatalogservice.models.User;
 import org.api.productcatalogservice.repos.UserRepo;
 import org.api.productcatalogservice.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
-@Service
+@Service("US")
+@Primary
 public class UserService implements IUserService {
 
     @Autowired
@@ -71,7 +73,9 @@ public class UserService implements IUserService {
         if(userRepo.findByUsername(user.getUsername()).isPresent()) {
             throw new AlreadyUserNamePresent("Already this username was taken please try again");
         }
-        return userUtils.getUser(user,null);
+        User newUser = userUtils.getUser(user,null);
+        userRepo.save(newUser);
+        return newUser;
     }
 
 
@@ -98,6 +102,12 @@ public class UserService implements IUserService {
             return userUtils.getUserDTO(userRepo.save(userUtils.getUser(dto, user)));
         }
         return null;
+    }
+
+    @Override
+    public ResponseUserDTO deleteUser(UUID id){
+        User user = userRepo.findById(id);
+        return userUtils.getUserDTO(user);
     }
 
 

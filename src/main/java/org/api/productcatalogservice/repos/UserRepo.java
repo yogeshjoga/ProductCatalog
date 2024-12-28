@@ -13,6 +13,7 @@ public interface UserRepo extends JpaRepository<User, Integer> {
      User findByUsernameAndPassword(String username, String password);
      Optional<User> findByUsername(String username);
      User findById(UUID userId);
+     User deleteById(UUID userId);
 
      // Parameter Placeholder Reference
      @Query("SELECT u.username from users u where u.id = ?1")
